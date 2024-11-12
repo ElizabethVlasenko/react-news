@@ -7,17 +7,22 @@ function MainHeader() {
 
   return (
     <header id="main-header">
-      <ul>
-        <Link href="/" className={path === "/" ? "active" : ""}>
-          Home
-        </Link>
-        <Link
-          href="/news"
-          className={path.startsWith("/news") ? `active` : null}
-        >
-          News
-        </Link>
-      </ul>
+      <div id="logo">
+        <Link href="/">NextNews</Link>
+      </div>
+      <nav>
+        <ul>
+          <Link href="/" className={path === "/" ? "active" : ""}>
+            Home
+          </Link>
+          <Link
+            href="/news"
+            className={path.startsWith("/news") ? `active` : null}
+          >
+            News
+          </Link>
+        </ul>
+      </nav>
     </header>
   );
 }
