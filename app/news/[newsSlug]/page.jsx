@@ -1,4 +1,5 @@
 import { DUMMY_NEWS } from "@/dummy-news";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
@@ -26,10 +27,12 @@ function Page({ params }) {
   return (
     <article className="news-article">
       <header>
-        <img
-          src={`/images/news/${newsItem.image}`}
-          alt={`${newsItem.title} image`}
-        />
+        <Link href={`/news/${newsSlug}/image`}>
+          <img
+            src={`/images/news/${newsItem.image}`}
+            alt={`${newsItem.title} image`}
+          />
+        </Link>
         <h1>{newsItem.title}</h1>
         <time dateTime={newsItem.date}>{newsItem.date}</time>
       </header>
