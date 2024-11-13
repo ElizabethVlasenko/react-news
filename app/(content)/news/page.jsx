@@ -1,6 +1,6 @@
 import { DUMMY_NEWS } from "@/dummy-news";
 
-import NewsList from "../_components/NewsList";
+import NewsList from "../../_components/NewsList";
 
 function Page() {
   return (
