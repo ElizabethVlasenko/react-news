@@ -1,24 +1,27 @@
-import { DUMMY_NEWS } from "@/dummy-news";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }) {
+import { getNewsItem } from "@/app/_lib/news";
+
+// export async function generateMetadata({ params }) {
+//   const newsSlug = params.newsSlug;
+
+//   const newsItem = await getNewsItem(newsSlug);
+
+//   if (!newsItem) {
+//     notFound();
+//   }
+
+//   return {
+//     title: newsItem.title,
+//   };
+// }
+
+async function Page({ params }) {
   const newsSlug = params.newsSlug;
 
-  const newsItem = DUMMY_NEWS.find((news) => news.slug === newsSlug);
-
-  if (!newsItem) {
-    notFound();
-  }
-  return {
-    title: newsItem.title,
-  };
-}
-
-function Page({ params }) {
-  const newsSlug = params.newsSlug;
-
-  const newsItem = DUMMY_NEWS.find((news) => news.slug === newsSlug);
+  const newsItem = await getNewsItem(newsSlug);
+  console.log("Component rerendered", new Date());
 
   if (!newsItem) {
     notFound();

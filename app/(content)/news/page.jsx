@@ -1,6 +1,5 @@
 import { getAllNews } from "@/app/_lib/news";
 import NewsList from "../../_components/NewsList";
-import { Suspense } from "react";
 
 async function Page() {
   const news = await getAllNews();

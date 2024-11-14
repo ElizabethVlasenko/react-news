@@ -3,8 +3,8 @@
 import NewsList from "@/app/_components/NewsList";
 import { getLatestNews } from "@/app/_lib/news";
 
-function page() {
-  const latestNews = getLatestNews();
+async function page() {
+  const latestNews = await getLatestNews();
 
   return (
     <>

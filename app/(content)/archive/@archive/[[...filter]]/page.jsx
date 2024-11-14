@@ -10,22 +10,22 @@ import Link from "next/link";
 //[[...filter]] - catch-all; will be activated after any path segments after archive;
 //it catches  "/archive/"" so it was conflicting with the @archive/page.js file
 
-function page({ params }) {
+async function page({ params }) {
   const filter = params.filter; // returns an array of the path [ '2021', '2' ]
 
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
 
   let news;
-  let links = getAvailableNewsYears();
+  let links = await getAvailableNewsYears();
 
   if (selectedYear && !selectedMonth) {
-    news = getNewsForYear(selectedYear);
+    news = await getNewsForYear(selectedYear);
     links = getAvailableNewsMonths(selectedYear);
   }
 
   if (selectedYear && selectedMonth) {
-    news = getNewsForYearAndMonth(selectedYear, selectedMonth);
+    news = await getNewsForYearAndMonth(selectedYear, selectedMonth);
     links = [];
   }
 
@@ -35,10 +35,12 @@ function page({ params }) {
     newsContent = <NewsList news={news} />;
   }
 
+  const availableYears = await getAvailableNewsYears();
+
   if (
-    (selectedYear && !getAvailableNewsYears().includes(+selectedYear)) ||
+    (selectedYear && !availableYears.includes(selectedYear)) ||
     (selectedMonth &&
-      !getAvailableNewsMonths(selectedYear).includes(+selectedMonth))
+      !(await getAvailableNewsMonths(selectedYear).includes(selectedMonth)))
   ) {
     throw new Error("Invalid filter");
   }
